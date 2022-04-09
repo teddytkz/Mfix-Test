@@ -53,6 +53,17 @@ class BooksController extends Controller
         // @TODO implement
         $book = new Book();
 
+        $data = $request->validated();
+        
+        $book->isbn = $data['isbn'];
+        $book->title = $data['title'];
+        $book->description = $data['description'];
+        $book->published_year = $data['published_year'];
+        $book->save();
+
+        $authors = Author::whereIn('id', $data['authors'])->get();
+        $book->authors()->saveMany($authors);
+        
         return new BookResource($book);
     }
 }
