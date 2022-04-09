@@ -13,7 +13,8 @@ class BooksController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth.admin')->except(['index']);
     }
 
     public function index(Request $request)
@@ -63,7 +64,7 @@ class BooksController extends Controller
 
         $authors = Author::whereIn('id', $data['authors'])->get();
         $book->authors()->saveMany($authors);
-        
+
         return new BookResource($book);
     }
 }

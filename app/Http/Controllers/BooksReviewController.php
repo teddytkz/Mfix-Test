@@ -11,7 +11,8 @@ class BooksReviewController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth');
+        $this->middleware('auth.admin');
     }
 
     public function store(int $bookId, PostBookReviewRequest $request)
