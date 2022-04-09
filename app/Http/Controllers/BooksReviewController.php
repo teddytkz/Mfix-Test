@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\BookReview;
+use App\Book;
 use App\Http\Requests\PostBookReviewRequest;
 use App\Http\Resources\BookReviewResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BooksReviewController extends Controller
 {
