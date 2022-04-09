@@ -33,5 +33,10 @@ class BooksReviewController extends Controller
     public function destroy(int $bookId, int $reviewId, Request $request)
     {
         // @TODO implement
+        $book = Book::findOrFail($bookId);
+        $bookReview = $book->reviews()->findOrFail($reviewId)->delete();
+        return response()->json([
+            'message' => 'Review Deleted'
+        ], 204);
     }
 }
