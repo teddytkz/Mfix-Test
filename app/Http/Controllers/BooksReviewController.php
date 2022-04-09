@@ -17,8 +17,15 @@ class BooksReviewController extends Controller
     public function store(int $bookId, PostBookReviewRequest $request)
     {
         // @TODO implement
-        $bookReview = new BookReview();
+        $user = Auth::user();
+        $book = Book::findOrFail($bookId);
 
+        $bookReview = new BookReview();
+        $bookReview->book_id = $bookId;
+        $bookReview->user_id = $user->id;
+        $bookReview->review = $request->review;
+        $bookReview->comment = $request->comment;
+        $bookReview->save();
         return new BookReviewResource($bookReview);
     }
 
